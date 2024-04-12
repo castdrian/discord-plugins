@@ -1,4 +1,5 @@
 {
+  "name": "mobile-plugins",
   "private": true,
   "scripts": {
     "build": "bun build.mjs",

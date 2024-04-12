@@ -1,0 +1,7 @@
+{
+  "name": "discord-plugins",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ]
+}
