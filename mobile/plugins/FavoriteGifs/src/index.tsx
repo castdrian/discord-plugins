@@ -32,7 +32,8 @@ const unpatch = before("openLazy", ActionSheet, ([component, args, actionMessage
       if (!gifDetailsArray.length) return;
 
       for (let gifDetails of gifDetailsArray) {
-        const favorites = UserSettingsProtoStore.frecencyWithoutFetchingLatest as FrecencyStore;
+		const favorites = UserSettingsProtoStore.frecencyWithoutFetchingLatest as FrecencyStore;
+		if (!favorites.favoriteGifs) return;
         const maxOrder = Math.max(...Object.values(favorites.favoriteGifs.gifs).map(gif => gif.order));
 
         const isGifFavorite = favorites.favoriteGifs.gifs[gifDetails.src] !== undefined || favorites.favoriteGifs.gifs[gifDetails.url] !== undefined;
