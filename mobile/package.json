@@ -1,0 +1,29 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "bun build.mjs",
+    "build:dbg": "bun build.mjs --nominify",
+    "dev": "http-server dist --port 2121"
+  },
+  "dependencies": {
+    "@swc/helpers": "^0.4.14"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^24.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@swc/core": "^1.3.35",
+    "esbuild": "^0.16.14",
+    "http-server": "^14.1.1",
+    "rollup": "^3.9.1",
+    "rollup-plugin-esbuild": "^5.0.0",
+    "vendetta-types": "latest"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "react",
+        "react-native"
+      ]
+    }
+  }
+}
