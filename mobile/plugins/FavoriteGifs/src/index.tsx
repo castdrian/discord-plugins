@@ -40,16 +40,16 @@ const unpatch = before("openLazy", ActionSheet, ([component, args, actionMessage
 
         const filename = getFilename(gifDetails.url);
 
-        buttons.unshift(
-          <CoolRow
-            label={isGifFavorite ? `Remove ${filename} from Favorites` : `Add ${filename} to Favorites`}
-            icon={isGifFavorite ? getAssetIDByName("ic_clear") : getAssetIDByName("ic_star_filled")}
-            onPress={createOnPressHandler(gifDetails, favorites, isGifFavorite, filename)}
-          />
-        );
+		buttons.splice(0, 0,
+		  <CoolRow
+			label={isGifFavorite ? `Remove ${filename} from Favorites` : `Add ${filename} to Favorites`}
+			icon={isGifFavorite ? getAssetIDByName("ic_clear") : getAssetIDByName("ic_star_filled")}
+			onPress={createOnPressHandler(gifDetails, favorites, isGifFavorite, filename)}
+		  />
+		);
 
         if (isGifFavorite && !isGifTopFavorite) {
-          buttons.unshift(
+          buttons.splice(0, 0,
             <CoolRow
               label={`Bump ${filename} to the top of Favorites`}
               icon={getAssetIDByName("ic_activity_24px")}
