@@ -1,7 +1,8 @@
 import { before, instead } from "@vendetta/patcher";
 import { findByProps } from "@vendetta/metro";
 import { storage } from "@vendetta/plugin";
-import { Text } from "@vendetta/components";
+import { React } from "@vendetta/metro/common";
+import { Text } from "react-native";
 
 // Initialize crash counter in plugin storage
 storage.crashesPrevented ??= 0;
