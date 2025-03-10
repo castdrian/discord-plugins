@@ -4,8 +4,6 @@ import { storage } from "@vendetta/plugin";
 import { useProxy } from "@vendetta/storage";
 import { View, Text } from "@vendetta/ui/components";
 
-useProxy(storage);
-
 storage.crashesPrevented ??= 0;
 
 const pushFeedbackModule = findByProps("getPushFeedback", "hasPushNotificationPermissions");
@@ -52,6 +50,8 @@ if (channelStreamModule) {
 }
 
 function SettingsPage() {
+	useProxy(storage);
+
 	return (
 		<View style={{ padding: 16 }}>
 			<Text>Crashes prevented: {storage.crashesPrevented}</Text>
