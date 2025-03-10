@@ -2,7 +2,6 @@ import { before, instead } from "@vendetta/patcher";
 import { findByProps } from "@vendetta/metro";
 import { storage } from "@vendetta/plugin";
 import { React } from "@vendetta/metro/common";
-import { Text } from "react-native";
 
 // Initialize crash counter in plugin storage
 storage.crashesPrevented ??= 0;
@@ -59,9 +58,11 @@ if (channelStreamModule) {
 
 // Simple settings UI
 function SettingsPage() {
-	return React.createElement("div", { style: { padding: 16 } }, [
-		React.createElement(Text, {}, `Crashes prevented: ${storage.crashesPrevented}`),
-	]);
+	return (
+		<View style={{ padding: 16 }}>
+			<Text>Crashes prevented: {storage.crashesPrevented}</Text>
+		</View>
+	);
 }
 
 export default {
