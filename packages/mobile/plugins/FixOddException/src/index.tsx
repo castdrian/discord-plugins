@@ -2,7 +2,7 @@ import { before, instead } from "@vendetta/patcher";
 import { findByProps } from "@vendetta/metro";
 import { storage } from "@vendetta/plugin";
 import { useProxy } from "@vendetta/storage";
-import { View, Text } from "@vendetta/ui/components";
+import { View, Text } from "react-native";
 
 storage.crashesPrevented ??= 0;
 
