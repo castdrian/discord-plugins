@@ -32,7 +32,7 @@ if (pushFeedbackModule) {
 	});
 
 	unpatches.push(unpatchPushFeedback);
-} 
+}
 
 // Patch the createChannelStream function to filter out null channels
 if (channelStreamModule) {
@@ -58,7 +58,7 @@ if (channelStreamModule) {
 // Simple settings UI
 function SettingsPage() {
 	return React.createElement("div", { style: { padding: 16 } }, [
-		React.createElement("div", {}, `Crashes prevented: ${storage.crashesPrevented}`),
+		React.createElement(Text, {}, `Crashes prevented: ${storage.crashesPrevented}`),
 	]);
 }
 
