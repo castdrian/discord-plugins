@@ -59,9 +59,9 @@ if (channelStreamModule) {
 // Simple settings UI
 function SettingsPage() {
 	return (
-		<View style={{ padding: 16 }}>
-			<Text>Crashes prevented: {storage.crashesPrevented}</Text>
-		</View>
+		<React.View style={{ padding: 16 }}>
+			<React.Text>Crashes prevented: {storage.crashesPrevented}</React.Text>
+		</React.View>
 	);
 }
 
