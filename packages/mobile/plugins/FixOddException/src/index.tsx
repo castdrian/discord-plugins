@@ -1,26 +1,24 @@
 import { before, instead } from "@vendetta/patcher";
 import { findByProps } from "@vendetta/metro";
 import { storage } from "@vendetta/plugin";
-import { React } from "@vendetta/metro/common";
+import { useProxy } from "@vendetta/storage";
+import { View, Text } from "@vendetta/ui/components";
 
-// Initialize crash counter in plugin storage
+useProxy(storage);
+
 storage.crashesPrevented ??= 0;
 
-// Find the modules by searching for relevant properties
 const pushFeedbackModule = findByProps("getPushFeedback", "hasPushNotificationPermissions");
 const channelStreamModule = findByProps("createChannelStream", "createDirectMessageChannelStream");
 
 let unpatches = [];
 
-// Patch the getPushFeedback function to add null checks
 if (pushFeedbackModule) {
 	const unpatchPushFeedback = before("getPushFeedback", pushFeedbackModule, (args) => {
 		const [channel] = args;
 
-		// If channel is null, prevent the crash and return an empty object
 		if (!channel) {
 			storage.crashesPrevented++;
-			// Return an empty feedback object to prevent further processing
 			return [{
 				channelId: "CRASH_PREVENTED",
 				muted: true,
@@ -35,11 +33,9 @@ if (pushFeedbackModule) {
 	unpatches.push(unpatchPushFeedback);
 }
 
-// Patch the createChannelStream function to filter out null channels
 if (channelStreamModule) {
 	const unpatchCreateChannelStream = instead("createChannelStream", channelStreamModule, (args, orig) => {
 		try {
-			// Filter out any null channels before they get processed
 			const validChannels = args[0]?.filter(channel => channel != null);
 
 			if (validChannels && validChannels.length !== args[0]?.length) {
@@ -48,7 +44,6 @@ if (channelStreamModule) {
 
 			return orig(...args);
 		} catch (e) {
-			// Return a minimal result to prevent crashes
 			return [];
 		}
 	});
@@ -56,12 +51,11 @@ if (channelStreamModule) {
 	unpatches.push(unpatchCreateChannelStream);
 }
 
-// Simple settings UI
 function SettingsPage() {
 	return (
-		<React.View style={{ padding: 16 }}>
-			<React.Text>Crashes prevented: {storage.crashesPrevented}</React.Text>
-		</React.View>
+		<View style={{ padding: 16 }}>
+			<Text>Crashes prevented: {storage.crashesPrevented}</Text>
+		</View>
 	);
 }
 
