@@ -7,7 +7,6 @@ import { logger } from "@vendetta/logger";
 
 storage.crashesPrevented ??= 0;
 
-// Use try/catch when loading modules to prevent installation errors
 let pushFeedbackModule;
 let channelStreamModule;
 
@@ -25,7 +24,6 @@ try {
 
 let unpatches = [];
 
-// Only patch if the module was successfully loaded
 if (pushFeedbackModule) {
 	const unpatchPushFeedback = before("getPushFeedback", pushFeedbackModule, (args) => {
 		const [channel] = args;
