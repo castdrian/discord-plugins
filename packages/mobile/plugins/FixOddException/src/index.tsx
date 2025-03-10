@@ -1,12 +1,9 @@
 import { before, instead } from "@vendetta/patcher";
 import { findByProps } from "@vendetta/metro";
 import { storage } from "@vendetta/plugin";
-import { useProxy } from "@vendetta/storage";
 import { React } from "@vendetta/metro/common";
 import { View, Text } from "@vendetta/ui/components";
 import { logger } from "@vendetta/logger";
-
-useProxy(storage);
 
 storage.crashesPrevented ??= 0;
 
