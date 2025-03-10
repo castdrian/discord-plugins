@@ -1,0 +1,11 @@
+{
+    "name": "FixOddException",
+    "description": "Fixes an odd exception",
+    "authors": [
+        {
+            "name": "castdrian",
+            "id": "224617799434108928"
+        }
+    ],
+    "main": "src/index.tsx"
+}
