@@ -1,7 +1,5 @@
 import { before, instead } from "@vendetta/patcher";
 import { findByProps } from "@vendetta/metro";
-import { showToast } from "@vendetta/ui/toasts";
-import { getAssetIDByName } from "@vendetta/ui/assets";
 import { storage } from "@vendetta/plugin";
 
 // Initialize crash counter in plugin storage
