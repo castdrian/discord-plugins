@@ -3,7 +3,9 @@ import { findByProps } from "@vendetta/metro";
 import { storage } from "@vendetta/plugin";
 import { useProxy } from "@vendetta/storage";
 import { React } from "@vendetta/metro/common";
-import { View, Text } from "@vendetta/ui/components";
+import { Forms } from "@vendetta/ui/components";
+
+const { FormText } = Forms;
 
 storage.crashesPrevented ??= 0;
 
@@ -54,9 +56,7 @@ function SettingsPage() {
 	useProxy(storage);
 
 	return (
-		<View style={{ padding: 16 }}>
-			<Text>Crashes prevented: {storage.crashesPrevented}</Text>
-		</View>
+		<FormText>Crashes prevented: {storage.crashesPrevented}</FormText>
 	);
 }
 
