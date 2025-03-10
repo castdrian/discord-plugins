@@ -1,26 +1,15 @@
 import { before, instead } from "@vendetta/patcher";
 import { findByProps } from "@vendetta/metro";
 import { storage } from "@vendetta/plugin";
-import { React } from "@vendetta/metro/common";
+import { useProxy } from "@vendetta/storage";
 import { View, Text } from "@vendetta/ui/components";
-import { logger } from "@vendetta/logger";
+
+useProxy(storage);
 
 storage.crashesPrevented ??= 0;
 
-let pushFeedbackModule;
-let channelStreamModule;
-
-try {
-	pushFeedbackModule = findByProps("getPushFeedback", "hasPushNotificationPermissions");
-} catch (e) {
-	logger.error("FixOddException: Failed to find pushFeedbackModule", e);
-}
-
-try {
-	channelStreamModule = findByProps("createChannelStream", "createDirectMessageChannelStream");
-} catch (e) {
-	logger.error("FixOddException: Failed to find channelStreamModule", e);
-}
+const pushFeedbackModule = findByProps("getPushFeedback", "hasPushNotificationPermissions");
+const channelStreamModule = findByProps("createChannelStream", "createDirectMessageChannelStream");
 
 let unpatches = [];
 
@@ -66,22 +55,13 @@ function SettingsPage() {
 	return (
 		<View style={{ padding: 16 }}>
 			<Text>Crashes prevented: {storage.crashesPrevented}</Text>
-			{(!pushFeedbackModule || !channelStreamModule) &&
-				<Text style={{ color: "red", marginTop: 8 }}>
-					Warning: Some modules could not be loaded. The plugin may not function correctly.
-				</Text>
-			}
 		</View>
 	);
 }
 
 export default {
-	onLoad: () => {
-		logger.log("FixOddException: Plugin loaded");
-	},
 	onUnload: () => {
 		unpatches.forEach(unpatch => unpatch());
-		logger.log("FixOddException: Plugin unloaded");
 	},
 	settings: SettingsPage
 };
