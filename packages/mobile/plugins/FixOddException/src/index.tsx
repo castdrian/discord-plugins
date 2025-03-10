@@ -1,6 +1,7 @@
 import { before, instead } from "@vendetta/patcher";
 import { findByProps } from "@vendetta/metro";
 import { storage } from "@vendetta/plugin";
+import { Text } from "@vendetta/components";
 
 // Initialize crash counter in plugin storage
 storage.crashesPrevented ??= 0;
